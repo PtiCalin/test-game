@@ -1,29 +1,34 @@
-# temp-test
+# Test Game (Unity)
 
-Initial documentation scaffold for the project.
+Unity prototype living in `temp-test/`, currently a basic scene scaffold using URP and the Input System.
+
+## Project status
+- Early-stage setup: imported Unity project files and configured ignores for generated folders.
+- Contains the default `SampleScene` and placeholder media folders (`Images`, `Musique`, `Videos`).
+- No gameplay loop yet; scene is suitable for experimenting with rendering, input, and asset import.
 
 ## Quick start
-1. Clone the repository.
-2. Choose the tech stack and install dependencies.
-3. Run tests locally (see `TESTING.md`) before opening a pull request.
+1) Clone the repo.
+2) Open Unity **6000.2.7f2** (project version) and load the project at `temp-test/`.
+3) Open `Assets/Scenes/SampleScene.unity` and press Play to run in the Editor.
+4) Add assets or scripts under `Assets/` as you iterate. Generated folders (`Library`, `Temp`, `Logs`, `Builds`, etc.) are ignored by git.
 
 ## Project layout
-- `README.md`: Overview and quick links.
-- `LICENSE`: Project licensing (MIT).
-- `CHANGELOG.md`: Release notes following Keep a Changelog format.
-- `PROJECT_FILES.md`: Inventory of key files and their purpose.
-- `TESTING.md`: How to run tests and check quality.
-- `CONTRIBUTION.md`: How to propose changes.
-- `.gitignore`: Common development artifacts to exclude from git.
+- `temp-test/Assets/Scenes/SampleScene.unity`: current main scene.
+- `temp-test/Assets/Settings/`: URP assets and renderer configs.
+- `temp-test/Assets/InputSystem_Actions.inputactions`: Input System actions asset (not yet wired to gameplay).
+- `temp-test/ProjectSettings/ProjectVersion.txt`: Unity editor version pin (6000.2.7f2).
+- `CHANGELOG.md`: Release notes following Keep a Changelog.
+- `PROJECT_FILES.md`: Inventory of notable files.
+- `TESTING.md`: How to run checks (general guidance; no automated tests yet).
+- `CONTRIBUTION.md`: Contribution guidelines.
+- `.gitignore`: Excludes Unity-generated and other development artifacts.
 
 ## Development flow
-- Create a topic branch from `main` for each change.
-- Keep changes small and focused; update docs alongside code.
-- Run tests and linting locally; add or update tests when behavior changes.
-- Open a pull request with a clear summary and link to relevant issues.
-
-## Release notes
-Releases and notable changes live in `CHANGELOG.md`.
+- Work on a feature branch off `main` (or the active integration branch).
+- Keep changes small; update docs alongside code.
+- Run in-Editor playtests when changing scenes, assets, or scripts.
+- Open a pull request with a clear summary and links to related issues.
 
 ## License
-This project is licensed under the MIT License. See `LICENSE` for details.
+MIT License. See `LICENSE`.
