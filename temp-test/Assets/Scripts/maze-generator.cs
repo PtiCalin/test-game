@@ -215,8 +215,15 @@ public class MazeGenerator : MonoBehaviour
 	private void CreatePlayer()
 	{
 		var existing = GameObject.FindWithTag("Player");
+
+		// If a player already exists in the scene (e.g., placed in the corridor), reuse it.
 		if (existing != null)
-			Destroy(existing);
+		{
+			EnsurePlayerComponents(existing);
+			ConfigureCamera(existing.transform);
+			ReserveCell(entranceCell.x, entranceCell.y);
+			return;
+		}
 
 		GameObject player = playerPrefab != null
 			? Instantiate(playerPrefab, Vector3.zero, Quaternion.identity, levelParent.transform)
@@ -255,14 +262,38 @@ public class MazeGenerator : MonoBehaviour
 
 		ReserveCell(entranceCell.x, entranceCell.y);
 
+		EnsurePlayerComponents(player);
+		ConfigureCamera(player.transform);
+	}
+
+	private void EnsurePlayerComponents(GameObject player)
+	{
+		Rigidbody rb = player.GetComponent<Rigidbody>();
+		if (rb == null)
+			rb = player.AddComponent<Rigidbody>();
+		rb.mass = 1f;
+		rb.linearDamping = 0f;
+		rb.angularDamping = 0.05f;
+		rb.useGravity = true;
+		rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+		Collider col = player.GetComponentInChildren<Collider>();
+		if (col == null)
+			col = player.AddComponent<CapsuleCollider>();
+		else if (col.isTrigger)
+			col.isTrigger = false;
+
 		Player controller = player.GetComponent<Player>() ?? player.AddComponent<Player>();
 		controller.MaxSpeed = playerMoveSpeed;
 		controller.JumpForce = playerJumpForce;
+	}
 
+	private void ConfigureCamera(Transform target)
+	{
 		var cameraRig = FindFirstObjectByType<GameCamera>(FindObjectsInactive.Include);
 		if (cameraRig != null)
 		{
-			cameraRig.SetTarget(player.transform);
+			cameraRig.SetTarget(target);
 			if (cameraRig.CurrentMode == GameCamera.CameraMode.ThirdPerson)
 				cameraRig.SnapToTarget();
 		}
