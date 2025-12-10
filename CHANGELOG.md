@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.5] - 2025-11-30
+
+### Added
+
+- Implemented Rigidbody-based player controller (`character.cs`) with Input System actions, air control, and double jump.
+- Added third-person orbit / bird's-eye camera (`camera-settings.cs`) with Tab toggle and cursor lock.
+- Created Poliigon-based materials (brick, bronze, wood) and configured import settings (linear metallic/roughness/AO, normal maps marked correctly).
+- Wired castle scene character to the imported model and shared ground material across corridor and maze room.
+
+### Changed
+
+- Castle corridor scaled to 30x10x4 with player spawn inside and ground alignment.
+- `README.md` and `PROJECT_FILES.md` updated with castle scene details, controls, new scripts, and materials.
+
 ## [0.1.4] - 2025-11-30
 
 ### Added
