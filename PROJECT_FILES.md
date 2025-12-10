@@ -3,9 +3,12 @@
 Snapshot of notable files tracked in the repository. Update this document as the project grows.
 
 ## Unity project (`temp-test/`)
-- `Assets/Scenes/SampleScene.unity`: Current main scene.
+- `Assets/Scenes/Menu.unity`: Menu scene with UI Canvas hosting a media player (AudioSource + VideoPlayer) that auto-plays menu music and the intro video.
+- `Assets/Scenes/SampleScene.unity`: Baseline sample scene.
 - `Assets/Settings/`: URP render pipeline assets and renderer configurations.
 - `Assets/InputSystem_Actions.inputactions`: Input System actions asset (not yet wired to gameplay code).
+- `Assets/Musique/Menu Theme.mp3`: Menu music used by `Menu.unity`.
+- `Assets/Videos/Intro.mp4`: Intro video played in `Menu.unity`.
 - `ProjectSettings/ProjectVersion.txt`: Unity editor version pin (6000.2.7f2).
 - `Packages/manifest.json`: Unity package references (URP, Input System, etc.).
 - Generated folders (e.g., `Library`, `Temp`, `Logs`, `Builds`, `DerivedDataCache`) are ignored by git.
