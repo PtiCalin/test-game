@@ -30,7 +30,7 @@ public class MazeGenerator : MonoBehaviour
 	[SerializeField, Min(2)] private int mazeRows = 12;
 	[SerializeField, Min(2)] private int mazeColumns = 12;
 	[SerializeField, Min(1f)] private float cellSize = 4f;
-	[SerializeField] private float wallHeight = 5f;
+	[SerializeField] private float wallHeight = 10f;
 	[SerializeField] private float wallThickness = 0.5f;
 	[SerializeField] private Material wallMaterial;
 
