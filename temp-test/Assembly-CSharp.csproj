@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\maze-generator.cs" />
     <Compile Include="Assets\Scripts\collectible.cs" />
+    <Compile Include="Assets\Scripts\InputSystem_Actions.cs" />
     <Compile Include="Assets\Scripts\camera-settings.cs" />
     <Compile Include="Assets\Scripts\character.cs" />
   </ItemGroup>
