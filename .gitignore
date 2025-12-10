@@ -46,3 +46,14 @@ coverage/
 *.bak
 *.old
 *.lock
+
+# Unity generated files
+/temp-test/Library/
+/temp-test/Temp/
+/temp-test/Logs/
+/temp-test/Obj/
+/temp-test/Build/
+/temp-test/Builds/
+/temp-test/UserSettings/
+/temp-test/MemoryCaptures/
+/temp-test/DerivedDataCache/
