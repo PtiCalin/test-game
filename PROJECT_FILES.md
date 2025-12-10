@@ -3,8 +3,11 @@
 Snapshot of notable files tracked in the repository. Update this document as the project grows.
 
 ## Unity project (`temp-test/`)
+
 - `Assets/Scenes/Menu.unity`: Menu scene with UI Canvas hosting a media player (AudioSource + VideoPlayer) that auto-plays menu music and the intro video.
 - `Assets/Scenes/SampleScene.unity`: Baseline sample scene.
+- `Assets/Scripts/maze-generator.cs`: Procedural maze generator for the castle scene (builds maze, spawns player, places collectibles).
+- `Assets/Materials/`: Imported castle materials (coins, chests, ground, etc.) applied to scene objects and prefabs.
 - `Assets/Settings/`: URP render pipeline assets and renderer configurations.
 - `Assets/InputSystem_Actions.inputactions`: Input System actions asset (not yet wired to gameplay code).
 - `Assets/Musique/Menu Theme.mp3`: Menu music used by `Menu.unity`.
@@ -14,6 +17,7 @@ Snapshot of notable files tracked in the repository. Update this document as the
 - Generated folders (e.g., `Library`, `Temp`, `Logs`, `Builds`, `DerivedDataCache`) are ignored by git.
 
 ## Repo-level docs and config
+
 - `README.md`: Project overview, quick start, and links.
 - `LICENSE`: Licensing terms (MIT).
 - `CHANGELOG.md`: Release history in Keep a Changelog format.
