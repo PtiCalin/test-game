@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using GameCamera = IFT2720.GameCamera;
 
 /// <summary>
 /// Generates a procedural maze for the castle scene, spawns the player, and scatters collectibles.
@@ -81,15 +80,7 @@ public class MazeGenerator : MonoBehaviour
 		ReserveCell(entranceCell.x, entranceCell.y);
 		ReserveCell(exitCell.x, exitCell.y);
 
-		var cameraRig = FindFirstObjectByType<GameCamera>(FindObjectsInactive.Include);
-		if (cameraRig != null)
-		{
-			Vector3 center = GetCellCenter(rows / 2, columns / 2);
-			cameraRig.SetCenter(center);
-			cameraRig.ConfigureBounds(columns * spacing, rows * spacing);
-			if (cameraRig.CurrentMode == GameCamera.CameraMode.BirdsEye)
-				cameraRig.SnapToCenter();
-		}
+		// Camera rig integration removed to avoid dependency on IFT2720.GameCamera.
 	}
 
 	private void CreateWall(Vector3 position, Vector3 scale, GameObject parent)
@@ -290,13 +281,8 @@ public class MazeGenerator : MonoBehaviour
 
 	private void ConfigureCamera(Transform target)
 	{
-		var cameraRig = FindFirstObjectByType<GameCamera>(FindObjectsInactive.Include);
-		if (cameraRig != null)
-		{
-			cameraRig.SetTarget(target);
-			if (cameraRig.CurrentMode == GameCamera.CameraMode.ThirdPerson)
-				cameraRig.SnapToTarget();
-		}
+		// No-op: project currently lacks the IFT2720.GameCamera dependency.
+		// Optionally, assign Camera.main to follow/look-at the target here if needed.
 	}
 
 	private void CreateCollectibles()
