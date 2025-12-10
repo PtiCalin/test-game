@@ -1,0 +1,48 @@
+# OS and editor junk
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Dependencies and build artifacts
+node_modules/
+bower_components/
+.vendor/
+venv/
+.venv/
+.env
+.env.*
+*.egg-info/
+dist/
+build/
+.out/
+.cache/
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.pytest_cache/
+.mypy_cache/
+.tox/
+
+# Node / JS tooling
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+.parcel-cache/
+
+# Logs and temp
+*.log
+*.tmp
+*.swp
+*.swo
+*.orig
+coverage/
+.coverage*
+
+# Misc
+*.bak
+*.old
+*.lock
