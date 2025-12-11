@@ -8,7 +8,8 @@ Snapshot of notable files tracked in the repository. Update this document as the
 - `Assets/Scenes/SampleScene.unity`: Baseline sample scene.
 - `Assets/Scenes/Castle.unity`: Castle prototype scene (corridor 30x10x4, shared ground, maze generator, player controller, toggleable camera).
 - `Assets/Scripts/maze-generator.cs`: Procedural maze generator for the castle scene (builds maze, spawns player, places collectibles).
-- `Assets/Scripts/character.cs`: Rigidbody player controller (accel/speed cap, air control, double jump) using Input System actions.
+- `Assets/Scripts/character.cs`: Rigidbody player controller (accel/speed cap, air control, double jump) using Input Syste
+m actions.
 - `Assets/Scripts/camera-settings.cs`: Third-person orbit / bird's-eye camera controller with Tab toggle and cursor lock.
 - `Assets/Materials/`: Imported and authored materials (coins, chests, ground, Poliigon brick/metal/wood) applied to scene objects and prefabs.
 - `Assets/Settings/`: URP render pipeline assets and renderer configurations.
