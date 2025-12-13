@@ -205,9 +205,17 @@ namespace IFT2720
 				return;
 			}
 
-			Vector2 mouseDelta = lookAction.enabled
-				? lookAction.ReadValue<Vector2>()
-				: new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+			if (!lookAction.enabled)
+			{
+				lookAction.Enable();
+			}
+
+			Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
+			if (mouseDelta.sqrMagnitude < 0.000001f)
+			{
+				// Fallback to legacy input axes when the new Input System delta is unavailable (e.g., old Input Manager only).
+				mouseDelta = new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+			}
 			yaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
 			pitch -= mouseDelta.y * rotationSpeed * verticalSensitivity * Time.deltaTime;
 			pitch = ClampPitch(pitch);
