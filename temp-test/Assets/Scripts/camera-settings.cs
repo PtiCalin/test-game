@@ -64,6 +64,12 @@ namespace IFT2720
 			toggleAction.performed += _ => ToggleCameraMode();
 		}
 
+		private void OnEnable()
+		{
+			toggleAction?.Enable();
+			lookAction?.Enable();
+		}
+
 		private void Start()
 		{
 			EnsureTarget();
@@ -73,8 +79,6 @@ namespace IFT2720
 			pitch = ClampPitch(euler.x);
 
 			SetMode(startMode, true);
-			toggleAction.Enable();
-			lookAction.Enable();
 		}
 
 		private void LateUpdate()
@@ -203,19 +207,19 @@ namespace IFT2720
 				return;
 			}
 
-			Vector2 mouseDelta = lookAction.ReadValue<Vector2>();
+			Vector2 mouseDelta = lookAction.enabled
+				? lookAction.ReadValue<Vector2>()
+				: new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
 			yaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
 			pitch -= mouseDelta.y * rotationSpeed * verticalSensitivity * Time.deltaTime;
 			pitch = ClampPitch(pitch);
 
-			Quaternion desiredRotation = Quaternion.Euler(pitch, yaw, 0f);
+			Quaternion desiredRotation = Quaternion.Normalize(Quaternion.Euler(pitch, yaw, 0f));
 			Vector3 desiredPosition = target.position + targetOffset - desiredRotation * Vector3.forward * distance;
 
-			float positionLerp = 1f - Mathf.Exp(-thirdPersonPositionSmoothing * Time.deltaTime);
-			float rotationLerp = 1f - Mathf.Exp(-thirdPersonRotationSmoothing * Time.deltaTime);
-
-			transform.position = Vector3.Lerp(transform.position, desiredPosition, positionLerp);
-			transform.rotation = Quaternion.Slerp(transform.rotation, desiredRotation, rotationLerp);
+			// Pin the camera to the character (no smoothing) for tight follow.
+			transform.position = desiredPosition;
+			transform.rotation = desiredRotation;
 		}
 
 		private void UpdateBirdsEye()
@@ -224,7 +228,6 @@ namespace IFT2720
 			{
 				SetCenter(target.position);
 			}
-
 			Vector3 desiredPosition = new Vector3(birdsEyeCenter.x, birdsEyeHeight, birdsEyeCenter.z);
 			float followLerp = 1f - Mathf.Exp(-birdsEyeFollowSmoothing * Time.deltaTime);
 			transform.position = Vector3.Lerp(transform.position, desiredPosition, followLerp);
