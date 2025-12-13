@@ -14,7 +14,6 @@ public class MazeGenerator : MonoBehaviour
 	[Header("Player")]
 	[SerializeField] private Vector3 playerStartPosition = new Vector3(0, 1f, 0);
 	[SerializeField] private float playerMoveSpeed = 7f;
-	[SerializeField] private float playerJumpForce = 5f;
 	[SerializeField] private GameObject playerPrefab;
 
 	[Header("Collectibles")]
@@ -261,30 +260,24 @@ public class MazeGenerator : MonoBehaviour
 
 	private void EnsurePlayerComponents(GameObject player)
 	{
-		Rigidbody rb = player.GetComponent<Rigidbody>();
-		if (rb == null)
-			rb = player.AddComponent<Rigidbody>();
-		rb.mass = 1f;
-		rb.linearDamping = 0f;
-		rb.angularDamping = 0.05f;
-		rb.useGravity = true;
-		rb.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
-
-		Collider col = player.GetComponentInChildren<Collider>();
-		if (col == null)
-			col = player.AddComponent<CapsuleCollider>();
-		else if (col.isTrigger)
-			col.isTrigger = false;
-
-		Player controller = player.GetComponent<Player>() ?? player.AddComponent<Player>();
-		controller.MaxSpeed = playerMoveSpeed;
-		controller.JumpForce = playerJumpForce;
+		// Ensure the CharacterController-based Player is present and configured.
+		var controller = player.GetComponent<Player>() ?? player.AddComponent<Player>();
+		var cc = player.GetComponent<CharacterController>() ?? player.AddComponent<CharacterController>();
+		controller.Speed = playerMoveSpeed;
+		controller.SetCamera(Camera.main != null ? Camera.main.transform : null);
 	}
 
 	private void ConfigureCamera(Transform target)
 	{
-		// No-op: project currently lacks the IFT2720.GameCamera dependency.
-		// Optionally, assign Camera.main to follow/look-at the target here if needed.
+		var cam = Camera.main;
+		if (cam == null || target == null)
+			return;
+
+		var follow = cam.GetComponent<GameCamera>();
+		if (follow != null)
+		{
+			follow.SetTarget(target);
+		}
 	}
 
 	private void CreateCollectibles()
