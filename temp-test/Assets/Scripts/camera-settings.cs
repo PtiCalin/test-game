@@ -114,7 +114,7 @@ namespace IFT2720
 				return;
 			}
 
-			Quaternion desiredRotation = Quaternion.Euler(pitch, yaw, 0f);
+			Quaternion desiredRotation = SafeNormalize(Quaternion.Euler(pitch, yaw, 0f));
 			transform.rotation = desiredRotation;
 			transform.position = target.position + targetOffset - desiredRotation * Vector3.forward * distance;
 		}
@@ -222,15 +222,7 @@ namespace IFT2720
 			pitch = float.IsFinite(pitch) ? pitch : 0f;
 			pitch = ClampPitch(pitch);
 
-			Quaternion desiredRotation = Quaternion.Euler(pitch, yaw, 0f);
-			if (desiredRotation.sqrMagnitude < 1e-6f)
-			{
-				desiredRotation = Quaternion.identity;
-			}
-			else
-			{
-				desiredRotation = Quaternion.Normalize(desiredRotation);
-			}
+			Quaternion desiredRotation = SafeNormalize(Quaternion.Euler(pitch, yaw, 0f));
 			Vector3 desiredPosition = target.position + targetOffset - desiredRotation * Vector3.forward * distance;
 
 			// Pin the camera to the character (no smoothing) for tight follow.
@@ -260,6 +252,22 @@ namespace IFT2720
 		{
 			rawPitch = Mathf.Repeat(rawPitch + 180f, 360f) - 180f;
 			return Mathf.Clamp(rawPitch, minPitch, maxPitch);
+		}
+
+		private static Quaternion SafeNormalize(Quaternion q)
+		{
+			float magSq = q.x * q.x + q.y * q.y + q.z * q.z + q.w * q.w;
+			if (!float.IsFinite(magSq) || magSq < 1e-8f)
+			{
+				return Quaternion.identity;
+			}
+
+			float invMag = 1f / Mathf.Sqrt(magSq);
+			q.x *= invMag;
+			q.y *= invMag;
+			q.z *= invMag;
+			q.w *= invMag;
+			return q;
 		}
 
 		private void EnsureTarget()
