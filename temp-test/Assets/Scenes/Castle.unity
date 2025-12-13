@@ -186,7 +186,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8843758bdce4fc64f8c969bfc6c247c3, type: 2}
+  - {fileID: 2100000, guid: 5c9a3c0bf3b44b3f82ea64ce979e6a70, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -275,7 +275,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   groundScale: {x: 8, y: 1, z: 8}
-  groundMaterial: {fileID: 2100000, guid: 6f8c4c9ad0e2401f8c03e7a880c19155, type: 2}
+  groundMaterial: {fileID: 2100000, guid: 9d8a5f441c0b4be88dff3eaf0f2e9c7c, type: 2}
+  levelOffset: {x: 60, y: 0, z: 0}
   playerStartPosition: {x: 0, y: 1, z: 0}
   playerMoveSpeed: 7
   playerJumpForce: 5
@@ -293,7 +294,7 @@ MonoBehaviour:
   cellSize: 6
   wallHeight: 3
   wallThickness: 0.6
-  wallMaterial: {fileID: 2100000, guid: 8ef7b9b7581342fd9b9e6c8fd4c7188b, type: 2}
+  wallMaterial: {fileID: 2100000, guid: 5c9a3c0bf3b44b3f82ea64ce979e6a70, type: 2}
 --- !u!1 &1000300
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,7 +502,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: e01339eaf56927045a85d0f105dda010, type: 2}
+  - {fileID: 2100000, guid: 9d8a5f441c0b4be88dff3eaf0f2e9c7c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -679,7 +680,7 @@ MonoBehaviour:
   unlockCursorInBirdsEye: 1
   target: {fileID: 1000301}
   targetOffset: {x: 0, y: 1.6, z: 0}
-  distance: 6
+  distance: 4
   rotationSpeed: 120
   verticalSensitivity: 0.8
   minPitch: -30

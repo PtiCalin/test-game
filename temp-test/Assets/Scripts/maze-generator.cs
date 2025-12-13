@@ -9,6 +9,7 @@ public class MazeGenerator : MonoBehaviour
 	[Header("Ground")]
 	[SerializeField] private Vector3 groundScale = new Vector3(5, 1, 5);
 	[SerializeField] private Material groundMaterial;
+	[SerializeField] private Vector3 levelOffset = new Vector3(60f, 0f, 0f);
 
 	[Header("Player")]
 	[SerializeField] private Vector3 playerStartPosition = new Vector3(0, 1f, 0);
@@ -58,6 +59,7 @@ public class MazeGenerator : MonoBehaviour
 		GameObject ground = GameObject.CreatePrimitive(PrimitiveType.Plane);
 		ground.name = "Ground";
 		ground.transform.SetParent(levelParent.transform);
+		ground.transform.position = levelOffset;
 		ground.transform.localScale = groundScale;
 
 		if (groundMaterial != null)
@@ -87,7 +89,7 @@ public class MazeGenerator : MonoBehaviour
 	{
 		GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
 		wall.name = "Wall";
-		wall.transform.position = position;
+		wall.transform.position = position + levelOffset;
 		wall.transform.localScale = scale;
 		wall.transform.SetParent(parent.transform);
 
@@ -200,7 +202,7 @@ public class MazeGenerator : MonoBehaviour
 	{
 		row = Mathf.Clamp(row, 0, rows - 1);
 		col = Mathf.Clamp(col, 0, columns - 1);
-		return new Vector3(offsetX + col * spacing + cellHalf, 0f, offsetZ + row * spacing + cellHalf);
+		return new Vector3(offsetX + col * spacing + cellHalf, 0f, offsetZ + row * spacing + cellHalf) + levelOffset;
 	}
 
 	private void CreatePlayer()
