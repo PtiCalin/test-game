@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.6] - 2025-11-31
+
+### Added
+
+- Applied Poliigon wood floor (`Poliigon_WoodFloorAsh_4186_Preview1`) to corridor and maze floors; applied Poliigon brick wall (`Poliigon_BrickWallReclaimed_8320_Preview1`) to corridor and maze walls.
+- Added dedicated corridor floor plane for cleaner texturing.
+
+### Changed
+
+- Widened castle corridor to ~35x10x6 for better third-person camera clearance.
+- Updated maze defaults: cell size 6, wall height 3, wall thickness 0.6.
+- Documentation refreshed (`README.md`, `PROJECT_FILES.md`, `TESTING.md`).
+
 ## [0.1.5] - 2025-11-30
 
 ### Added

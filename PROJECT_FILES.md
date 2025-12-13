@@ -6,12 +6,11 @@ Snapshot of notable files tracked in the repository. Update this document as the
 
 - `Assets/Scenes/Menu.unity`: Menu scene with UI Canvas hosting a media player (AudioSource + VideoPlayer) that auto-plays menu music and the intro video.
 - `Assets/Scenes/SampleScene.unity`: Baseline sample scene.
-- `Assets/Scenes/Castle.unity`: Castle prototype scene (corridor 30x10x4, shared ground, maze generator, player controller, toggleable camera).
-- `Assets/Scripts/maze-generator.cs`: Procedural maze generator for the castle scene (builds maze, spawns player, places collectibles).
-- `Assets/Scripts/character.cs`: Rigidbody player controller (accel/speed cap, air control, double jump) using Input Syste
-m actions.
+- `Assets/Scenes/Castle.unity`: Castle prototype scene (corridor ~35x10x6, dedicated wood floor, brick walls, procedural maze room, player controller, third-person/bird's-eye camera).
+- `Assets/Scripts/maze-generator.cs`: Procedural maze generator for the castle scene (builds maze, spawns player, places collectibles; defaults: cell size 6, wall height 3, wall thickness 0.6).
+- `Assets/Scripts/character.cs`: Rigidbody player controller (accel/speed cap, air control, double jump) using Input System actions.
 - `Assets/Scripts/camera-settings.cs`: Third-person orbit / bird's-eye camera controller with Tab toggle and cursor lock.
-- `Assets/Materials/`: Imported and authored materials (coins, chests, ground, Poliigon brick/metal/wood) applied to scene objects and prefabs.
+- `Assets/Materials/`: Imported and authored materials (coins, chests, wood floor: `Poliigon_WoodFloorAsh_4186_Preview1`, brick walls: `Poliigon_BrickWallReclaimed_8320_Preview1`, bronze, ground) applied to scene objects and prefabs.
 - `Assets/Settings/`: URP render pipeline assets and renderer configurations.
 - `Assets/InputSystem_Actions.inputactions`: Input System actions asset used by the player controller.
 - `Assets/Musique/Menu Theme.mp3`: Menu music used by `Menu.unity`.

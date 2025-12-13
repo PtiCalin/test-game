@@ -9,9 +9,9 @@ Thank you for considering a contribution. These guidelines keep changes consiste
 
 ## Development expectations
 
-- Update documentation alongside code changes.
-- Add or adjust tests to cover new or changed behavior.
-- Run tests and linters locally before opening a pull request.
+- Update documentation alongside code changes (README, PROJECT_FILES, CHANGELOG when behavior or assets change).
+- Add or adjust tests to cover new or changed behavior; for now, include Play Mode notes in `TESTING.md`.
+- Run tests and linters locally before opening a pull request; for Unity changes, include a brief Play Mode verification note in the PR.
 
 ## Commit and PR hygiene
 
