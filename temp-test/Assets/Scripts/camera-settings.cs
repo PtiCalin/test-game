@@ -28,8 +28,6 @@ namespace IFT2720
 		[SerializeField] private float verticalSensitivity = 0.8f;
 		[SerializeField] private float minPitch = -30f;
 		[SerializeField] private float maxPitch = 70f;
-		[SerializeField] private float thirdPersonPositionSmoothing = 10f;
-		[SerializeField] private float thirdPersonRotationSmoothing = 12f;
 
 		[Header("Bird's-Eye View")]
 		[SerializeField] private float birdsEyeHeight = 35f;
