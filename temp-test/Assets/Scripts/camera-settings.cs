@@ -218,9 +218,19 @@ namespace IFT2720
 			}
 			yaw += mouseDelta.x * rotationSpeed * Time.deltaTime;
 			pitch -= mouseDelta.y * rotationSpeed * verticalSensitivity * Time.deltaTime;
+			yaw = float.IsFinite(yaw) ? yaw : 0f;
+			pitch = float.IsFinite(pitch) ? pitch : 0f;
 			pitch = ClampPitch(pitch);
 
-			Quaternion desiredRotation = Quaternion.Normalize(Quaternion.Euler(pitch, yaw, 0f));
+			Quaternion desiredRotation = Quaternion.Euler(pitch, yaw, 0f);
+			if (desiredRotation.sqrMagnitude < 1e-6f)
+			{
+				desiredRotation = Quaternion.identity;
+			}
+			else
+			{
+				desiredRotation = Quaternion.Normalize(desiredRotation);
+			}
 			Vector3 desiredPosition = target.position + targetOffset - desiredRotation * Vector3.forward * distance;
 
 			// Pin the camera to the character (no smoothing) for tight follow.
