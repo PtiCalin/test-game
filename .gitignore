@@ -57,3 +57,6 @@ coverage/
 /temp-test/UserSettings/
 /temp-test/MemoryCaptures/
 /temp-test/DerivedDataCache/
+
+# simple-code test folder
+/simple-code/
