@@ -16,6 +16,7 @@ namespace TestGame.Player
         [SerializeField] private float turnSpeed = 540f;
 
         [Header("Spawn")]
+        [SerializeField] private MazeBuilder maze;
         [SerializeField] private CorridorBuilder corridor;
         [SerializeField] private Vector3 spawnOffset = new Vector3(0f, 1f, 0f);
 
@@ -24,10 +25,14 @@ namespace TestGame.Player
 
         private Rigidbody _rb;
         private Vector3 _moveInput;
+        private Coroutine _spawnRoutine;
 
         private void Awake()
         {
             gameObject.tag = "Player";
+            // Always detach so the player doesn't inherit Maze transforms.
+            if (transform.parent != null)
+                transform.SetParent(null, worldPositionStays: true);
             _rb = GetComponent<Rigidbody>();
             _rb.constraints = RigidbodyConstraints.FreezeRotation;
 
@@ -40,9 +45,26 @@ namespace TestGame.Player
 
         private void Start()
         {
+            if (maze == null) maze = FindFirstObjectByType<MazeBuilder>();
             if (corridor == null) corridor = FindFirstObjectByType<CorridorBuilder>();
-            if (corridor != null)
-                transform.position = corridor.EntrancePositionWorld + spawnOffset;
+            RestartSpawnRoutine();
+        }
+
+        private void OnEnable()
+        {
+            if (maze == null) maze = FindFirstObjectByType<MazeBuilder>();
+            if (maze != null) maze.MazeBuilt += PlaceAtSpawnIfReady;
+            RestartSpawnRoutine();
+        }
+
+        private void OnDisable()
+        {
+            if (maze != null) maze.MazeBuilt -= PlaceAtSpawnIfReady;
+            if (_spawnRoutine != null)
+            {
+                StopCoroutine(_spawnRoutine);
+                _spawnRoutine = null;
+            }
         }
 
         private void Update()
@@ -71,6 +93,50 @@ namespace TestGame.Player
 
             Quaternion desiredRot = Quaternion.LookRotation(desiredDir, Vector3.up);
             _rb.MoveRotation(Quaternion.RotateTowards(_rb.rotation, desiredRot, turnSpeed * Time.fixedDeltaTime));
+        }
+
+        private void PlaceAtSpawnIfReady()
+        {
+            if (corridor == null) corridor = FindFirstObjectByType<CorridorBuilder>();
+            if (corridor == null) return;
+
+            // If a maze exists, wait until it finished building (positions corridor) before placing the player.
+            if (maze != null && !maze.IsBuilt) return;
+
+            // Ensure we are detached and snap to entrance.
+            if (transform.parent != null)
+                transform.SetParent(null, worldPositionStays: true);
+
+            transform.position = corridor.EntrancePositionWorld + spawnOffset;
+            _rb.linearVelocity = Vector3.zero;
+        }
+
+        private void RestartSpawnRoutine()
+        {
+            if (_spawnRoutine != null)
+            {
+                StopCoroutine(_spawnRoutine);
+            }
+            _spawnRoutine = StartCoroutine(WaitAndPlace());
+        }
+
+        private System.Collections.IEnumerator WaitAndPlace()
+        {
+            // Wait until both maze and corridor exist and maze finished building.
+            while (true)
+            {
+                if (maze == null) maze = FindFirstObjectByType<MazeBuilder>();
+                if (corridor == null) corridor = FindFirstObjectByType<CorridorBuilder>();
+
+                if (corridor != null && (maze == null || maze.IsBuilt))
+                {
+                    PlaceAtSpawnIfReady();
+                    _spawnRoutine = null;
+                    yield break;
+                }
+
+                yield return null;
+            }
         }
 
         private static Vector2 ReadMoveInput()

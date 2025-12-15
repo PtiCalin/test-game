@@ -20,8 +20,8 @@ namespace TestGame.Builders
         public float Length => length;
         public float Height => height;
 
-        public Vector3 EntrancePositionWorld => transform.position + new Vector3(0f, 0f, -length * 0.5f);
-        public Vector3 ExitPositionWorld => transform.position + new Vector3(0f, 0f, length * 0.5f);
+        public Vector3 EntrancePositionWorld => transform.TransformPoint(new Vector3(0f, 0f, -length * 0.5f));
+        public Vector3 ExitPositionWorld => transform.TransformPoint(new Vector3(0f, 0f, length * 0.5f));
 
         private void Start()
         {

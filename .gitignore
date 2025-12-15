@@ -49,14 +49,18 @@ coverage/
 
 # Unity generated files
 /simple-code/Library/
-/temp-test/Temp/
-/temp-test/Logs/
-/temp-test/Obj/
-/temp-test/Build/
-/temp-test/Builds/
-/temp-test/UserSettings/
-/temp-test/MemoryCaptures/
-/temp-test/DerivedDataCache/
+/simple-code/Temp/
+/simple-code/Logs/
+/simple-code/Obj/
+/simple-code/Build/
+/simple-code/Builds/
+/simple-code/UserSettings/
+/simple-code/MemoryCaptures/
+/simple-code/DerivedDataCache/
 
 # temp-test test folder
+/test-1/
+/test-2/
 /temp-test/
+/temp-test-2/
+/temp-test-3/
