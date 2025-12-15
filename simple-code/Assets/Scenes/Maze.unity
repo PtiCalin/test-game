@@ -359,7 +359,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 744796433}
   m_Father: {fileID: 1119809856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &258426544
@@ -774,8 +775,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 1119809856}
+  m_Children: []
   m_Father: {fileID: 1762553205}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &548712111
@@ -793,6 +793,7 @@ MonoBehaviour:
   rows: 16
   cols: 16
   cellSize: 10
+  floorThickness: 0.2
   wallHeight: 8
   wallThickness: 2
   floorMaterial: {fileID: 2100000, guid: 9d8a5f441c0b4be88dff3eaf0f2e9c7c, type: 2}
@@ -859,7 +860,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1119809856}
+    m_TransformParent: {fileID: 258426543}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: d7caffae926742e44a60e87922a951a6, type: 3}
       propertyPath: m_LocalPosition.x
@@ -976,9 +977,7 @@ Transform:
   m_Children:
   - {fileID: 1797130270}
   - {fileID: 258426543}
-  - {fileID: 553842944}
-  - {fileID: 744796433}
-  m_Father: {fileID: 548712110}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1119809857
 MonoBehaviour:
@@ -993,6 +992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestGame.Collectibles.CollectibleSpawner
   maze: {fileID: 548712111}
+  collectiblesRoot: {fileID: 0}
   coinCount: 10
   treasureCount: 3
   coinPrefab: {fileID: 919132149155446097, guid: 82022832f032b4444954a9f1a2f5ed96, type: 3}
@@ -1109,8 +1109,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TestGame.Player.CharacterBehaviour
   moveSpeed: 10
   turnSpeed: 600
+  maze: {fileID: 0}
   corridor: {fileID: 2039705467}
-  spawnOffset: {x: 0, y: 1, z: 0}
+  spawnOffset: {x: 0, y: 1.5, z: 0}
   cameraRig: {fileID: 330585548}
 --- !u!136 &1319496527
 CapsuleCollider:
@@ -1168,7 +1169,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 1119809856}
+    m_TransformParent: {fileID: 1797130270}
     m_Modifications:
     - target: {fileID: -8679921383154817045, guid: 82022832f032b4444954a9f1a2f5ed96, type: 3}
       propertyPath: m_LocalScale.x
@@ -1294,7 +1295,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 553842944}
   m_Father: {fileID: 1119809856}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1797130271
@@ -1503,7 +1505,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1967638057}
   m_Layer: 0
-  m_Name: Po Fin
+  m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1585,8 +1587,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 330585546}
-  - {fileID: 1967638057}
   - {fileID: 1319496525}
+  - {fileID: 1967638057}
+  - {fileID: 1119809856}
   - {fileID: 1762553205}
   - {fileID: 1804881196}
   - {fileID: 428953774}

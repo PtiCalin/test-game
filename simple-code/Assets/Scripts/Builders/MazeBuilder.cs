@@ -12,6 +12,7 @@ namespace TestGame.Builders
         [SerializeField] private int rows = 8;
         [SerializeField] private int cols = 12;
         [SerializeField] private float cellSize = 4f;
+        [SerializeField] private float floorThickness = 0.2f;
         [SerializeField] private float wallHeight = 10f;
         [SerializeField] private float wallThickness = 0.2f;
 
@@ -187,18 +188,16 @@ namespace TestGame.Builders
 
         private void BuildGeometry()
         {
-            // Floor as a single plane.
-            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Plane);
-            floor.name = "Floor";
-            floor.transform.SetParent(transform, false);
-
+            // Floor as a solid slab to ensure reliable collisions.
             float mazeWidth = cols * cellSize;
             float mazeDepth = rows * cellSize;
-            floor.transform.localScale = new Vector3(mazeWidth / 10f, 1f, mazeDepth / 10f);
+            float halfThickness = Mathf.Max(0.01f, floorThickness) * 0.5f;
 
-            Vector3 floorCenterLocal = new Vector3(0f, 0f, 0f) + levelOffset;
-            floor.transform.localPosition = floorCenterLocal;
-
+            GameObject floor = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            floor.name = "Floor";
+            floor.transform.SetParent(transform, false);
+            floor.transform.localScale = new Vector3(mazeWidth, halfThickness * 2f, mazeDepth);
+            floor.transform.localPosition = new Vector3(0f, -halfThickness, 0f) + levelOffset;
             ApplyMaterial(floor, floorMaterial);
 
             // Walls: loop all cells; create walls where mazeLayout indicates.
