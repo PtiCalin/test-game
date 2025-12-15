@@ -615,8 +615,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c24d64010b15a49aa9f2e64aba0725, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TestGame.Builders.MazeBuilder
-  rows: 3
-  cols: 5
+  rows: 5
+  cols: 8
   cellSize: 10
   floorThickness: 0.2
   wallHeight: 8
