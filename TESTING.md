@@ -7,7 +7,8 @@ Basic guidance for running and adding tests. Adjust commands to match the chosen
 - Ensure required services (databases, queues) are available if tests depend on them.
 
 ## Running tests
-- Unit tests: replace with your command (e.g., `npm test`, `pnpm test`, `yarn test`, or `python -m pytest`).
+- Unity playtest (current): open `Assets/Scenes/Castle.unity`, enter Play Mode, verify third-person/bird's-eye camera toggle (`Tab`), movement (`WASD`), jump (`Space`), collision with maze walls, and collectible pickup.
+- Automated unit tests: none yet—add per stack (e.g., `npm test`, `pnpm test`, `yarn test`, or `python -m pytest`).
 - Linting/formatting: add and run your preferred tools (e.g., `npm run lint`, `ruff check .`, `black .`).
 - Type checks: add commands as applicable (e.g., `mypy .`, `pyright`, `tsc --noEmit`).
 

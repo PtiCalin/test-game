@@ -3,10 +3,16 @@
 Snapshot of notable files tracked in the repository. Update this document as the project grows.
 
 ## Unity project (`temp-test/`)
+
 - `Assets/Scenes/Menu.unity`: Menu scene with UI Canvas hosting a media player (AudioSource + VideoPlayer) that auto-plays menu music and the intro video.
 - `Assets/Scenes/SampleScene.unity`: Baseline sample scene.
+- `Assets/Scenes/Castle.unity`: Castle prototype scene (corridor ~35x10x6, dedicated wood floor, brick walls, procedural maze room, player controller, third-person/bird's-eye camera).
+- `Assets/Scripts/maze-generator.cs`: Procedural maze generator for the castle scene (builds maze, spawns player, places collectibles; defaults: cell size 6, wall height 3, wall thickness 0.6).
+- `Assets/Scripts/character.cs`: Rigidbody player controller (accel/speed cap, air control, double jump) using Input System actions.
+- `Assets/Scripts/camera-settings.cs`: Third-person orbit / bird's-eye camera controller with Tab toggle and cursor lock.
+- `Assets/Materials/`: Imported and authored materials (coins, chests, wood floor: `Poliigon_WoodFloorAsh_4186_Preview1`, brick walls: `Poliigon_BrickWallReclaimed_8320_Preview1`, bronze, ground) applied to scene objects and prefabs.
 - `Assets/Settings/`: URP render pipeline assets and renderer configurations.
-- `Assets/InputSystem_Actions.inputactions`: Input System actions asset (not yet wired to gameplay code).
+- `Assets/InputSystem_Actions.inputactions`: Input System actions asset used by the player controller.
 - `Assets/Musique/Menu Theme.mp3`: Menu music used by `Menu.unity`.
 - `Assets/Videos/Intro.mp4`: Intro video played in `Menu.unity`.
 - `ProjectSettings/ProjectVersion.txt`: Unity editor version pin (6000.2.7f2).
@@ -14,6 +20,7 @@ Snapshot of notable files tracked in the repository. Update this document as the
 - Generated folders (e.g., `Library`, `Temp`, `Logs`, `Builds`, `DerivedDataCache`) are ignored by git.
 
 ## Repo-level docs and config
+
 - `README.md`: Project overview, quick start, and links.
 - `LICENSE`: Licensing terms (MIT).
 - `CHANGELOG.md`: Release history in Keep a Changelog format.

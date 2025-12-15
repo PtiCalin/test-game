@@ -48,7 +48,7 @@ coverage/
 *.lock
 
 # Unity generated files
-/temp-test/Library/
+/simple-code/Library/
 /temp-test/Temp/
 /temp-test/Logs/
 /temp-test/Obj/
@@ -58,5 +58,5 @@ coverage/
 /temp-test/MemoryCaptures/
 /temp-test/DerivedDataCache/
 
-# simple-code test folder
-/simple-code/
+# temp-test test folder
+/temp-test/
