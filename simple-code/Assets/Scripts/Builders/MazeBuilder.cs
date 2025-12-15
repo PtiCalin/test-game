@@ -39,6 +39,9 @@ namespace TestGame.Builders
         public int Cols => cols;
         public float OffsetX { get; private set; }
         public float OffsetZ { get; private set; }
+        public bool IsBuilt { get; private set; }
+
+        public event Action MazeBuilt;
 
         public event Action PlayerEnteredMaze;
 
@@ -55,6 +58,8 @@ namespace TestGame.Builders
 
         public void Build()
         {
+            IsBuilt = false;
+
             if (rows < 1) rows = 1;
             if (cols < 1) cols = 1;
 
@@ -89,6 +94,9 @@ namespace TestGame.Builders
             BuildEntranceTrigger();
             BuildExitTrigger();
             AttachCorridor();
+
+            IsBuilt = true;
+            MazeBuilt?.Invoke();
         }
 
         public Vector3 GetCellCenterWorld(int row, int col, float y = 0f)
