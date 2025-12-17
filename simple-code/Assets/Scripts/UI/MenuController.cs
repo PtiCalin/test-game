@@ -8,9 +8,8 @@ namespace TestGame.UI
     {
         [SerializeField] private Button enterButton;
         [SerializeField] private Button fleeButton;
-        [SerializeField] private float enterButtonDelaySeconds = 22f;
-        [SerializeField] private float fleeButtonDelaySeconds = 22f;
-        [SerializeField] private float settingsButtonDelaySeconds = 22f;
+        [SerializeField] private Button settingsButton;
+        [SerializeField] private float uiDelaySeconds = 22f;
 
         private void Awake()
         {
@@ -20,33 +19,37 @@ namespace TestGame.UI
                 enterButton.onClick.AddListener(() => GameManager.Instance?.StartGame());
             }
 
-            if (quitButton != null)
-                quitButton.onClick.AddListener(() => GameManager.Instance?.QuitGame());
-        }
-
-        private void enterButton()
-        {
-            if (enterButton != null)
-                StartCoroutine(ShowEnterAfterDelay());
-        }
-
-        private void fleeButton()
-        {
             if (fleeButton != null)
-                StartCoroutine(ShowEnterAfterDelay());
-        }
-
-        private void settingsButtonDelaySecondsButton()
-        {
+            {
+                fleeButton.gameObject.SetActive(false);
+                fleeButton.onClick.AddListener(() => GameManager.Instance?.QuitGame());
+            }
             if (settingsButton != null)
-                StartCoroutine(ShowEnterAfterDelay());
+            {
+                settingsButton.gameObject.SetActive(false);
+                settingsButton.onClick.AddListener(OnSettingsClicked);
+            }
         }
 
-        private System.Collections.IEnumerator ShowEnterAfterDelay()
+        private void Start()
         {
-            yield return new WaitForSeconds(Mathf.Max(0f, enterButtonDelaySeconds));
-            if (enterButton != null)
-                enterButton.gameObject.SetActive(true);
+            StartCoroutine(ShowAfterDelay(enterButton));
+            StartCoroutine(ShowAfterDelay(fleeButton));
+            StartCoroutine(ShowAfterDelay(settingsButton));
+        }
+
+        private System.Collections.IEnumerator ShowAfterDelay(Button button)
+        {
+            if (button == null)
+                yield break;
+
+            yield return new WaitForSeconds(Mathf.Max(0f, uiDelaySeconds));
+            button.gameObject.SetActive(true);
+        }
+
+        private void OnSettingsClicked()
+        {
+            Debug.LogWarning("Settings is not implemented yet.");
         }
     }
 }
