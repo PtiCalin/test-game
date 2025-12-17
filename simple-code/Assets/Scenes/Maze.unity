@@ -728,8 +728,10 @@ MonoBehaviour:
   maze: {fileID: 548712111}
   coinCount: 10
   treasureCount: 3
-  coinPrefab: {fileID: 919132149155446097, guid: 82022832f032b4444954a9f1a2f5ed96, type: 3}
-  treasurePrefab: {fileID: 919132149155446097, guid: d7caffae926742e44a60e87922a951a6, type: 3}
+  coinPrefab: {fileID: 2135667320269940063, guid: 82022832f032b4444954a9f1a2f5ed96, type: 3}
+  treasurePrefab: {fileID: 1188256223936568184, guid: d7caffae926742e44a60e87922a951a6, type: 3}
+  coinMaterial: {fileID: 2100000, guid: 3ea23471320defe499e1a2e93f3c9b19, type: 2}
+  treasureMaterial: {fileID: 2100000, guid: 17a0a6ba4428f6b419c844c5952b342e, type: 2}
   spawnY: 1
 --- !u!1 &1319496524
 GameObject:

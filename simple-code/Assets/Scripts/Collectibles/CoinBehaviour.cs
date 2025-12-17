@@ -18,6 +18,7 @@ namespace TestGame.Collectibles
         [SerializeField] private AudioClip pickupSfx;
 
         private Vector3 _startPos;
+    private bool _collected;
 
         private void Awake()
         {
@@ -34,8 +35,20 @@ namespace TestGame.Collectibles
 
         private void OnTriggerEnter(Collider other)
         {
+            CollectIfPlayer(other.gameObject);
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            CollectIfPlayer(collision.gameObject);
+        }
+
+        private void CollectIfPlayer(GameObject other)
+        {
+            if (_collected) return;
             if (!other.CompareTag("Player")) return;
 
+            _collected = true;
             GameManager.Instance?.AddCollectible(value, isTreasure: false);
             PlaySfx();
             Destroy(gameObject);

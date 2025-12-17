@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using TestGame.Collectibles;
 using UnityEngine;
 
 namespace TestGame.Builders
@@ -298,7 +299,13 @@ namespace TestGame.Builders
         {
             for (int i = transform.childCount - 1; i >= 0; i--)
             {
-                Destroy(transform.GetChild(i).gameObject);
+                Transform child = transform.GetChild(i);
+
+                // Keep the collectibles container so the spawner persists between rebuilds.
+                if (child.GetComponent<CollectibleSpawner>() != null)
+                    continue;
+
+                Destroy(child.gameObject);
             }
         }
     }

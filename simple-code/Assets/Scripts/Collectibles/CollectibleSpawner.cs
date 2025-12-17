@@ -20,13 +20,45 @@ namespace TestGame.Collectibles
         [Header("Spawn")]
         [SerializeField] private float spawnY = 1f;
 
-        private void Start()
+        private bool _hasSpawnedThisBuild;
+
+        private void Awake()
         {
             if (maze == null) maze = FindFirstObjectByType<MazeBuilder>();
-            if (maze == null) return;
+        }
+
+        private void OnEnable()
+        {
+            if (maze == null) maze = FindFirstObjectByType<MazeBuilder>();
+            if (maze != null)
+                maze.MazeBuilt += OnMazeBuilt;
+
+            // If the maze is already built (e.g., opened from editor), spawn once.
+            if (maze != null && maze.IsBuilt)
+                OnMazeBuilt();
+        }
+
+        private void OnDisable()
+        {
+            if (maze != null)
+                maze.MazeBuilt -= OnMazeBuilt;
+        }
+
+        private void OnMazeBuilt()
+        {
+            _hasSpawnedThisBuild = false;
+            SpawnAll();
+        }
+
+        private void SpawnAll()
+        {
+            if (maze == null || !maze.IsBuilt) return;
+            if (_hasSpawnedThisBuild) return;
 
             Spawn(coinPrefab, coinCount, "Coins");
             Spawn(treasurePrefab, treasureCount, "Treasures");
+
+            _hasSpawnedThisBuild = true;
         }
 
         private void Spawn(GameObject prefab, int count, string containerName)

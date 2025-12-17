@@ -82,8 +82,22 @@ namespace TestGame.Player
             if (cameraRig != null)
             {
                 Transform cam = cameraRig.transform;
-                camForward = Vector3.ProjectOnPlane(cam.forward, Vector3.up).normalized;
-                camRight = Vector3.ProjectOnPlane(cam.right, Vector3.up).normalized;
+                Vector3 forwardCandidate = cam.forward;
+                if (IsNearlyVertical(forwardCandidate))
+                    forwardCandidate = cam.up; // Forward points down in birds-eye, so use up to recover planar forward.
+
+                camForward = Vector3.ProjectOnPlane(forwardCandidate, Vector3.up);
+                camRight = Vector3.ProjectOnPlane(cam.right, Vector3.up);
+
+                if (camForward.sqrMagnitude < 0.0001f)
+                    camForward = Vector3.forward;
+                else
+                    camForward.Normalize();
+
+                if (camRight.sqrMagnitude < 0.0001f)
+                    camRight = Vector3.right;
+                else
+                    camRight.Normalize();
             }
 
             Vector3 desiredDir = (camForward * _moveInput.z + camRight * _moveInput.x).normalized;
@@ -161,6 +175,15 @@ namespace TestGame.Player
             // Legacy Input Manager: Horizontal/Vertical map to WASD + Arrow keys by default.
             return new Vector2(Input.GetAxisRaw("Horizontal"), Input.GetAxisRaw("Vertical"));
 #endif
+        }
+
+        private static bool IsNearlyVertical(Vector3 v)
+        {
+            float mag = v.sqrMagnitude;
+            if (mag < 0.0001f) return true;
+
+            float dotUp = Mathf.Abs(Vector3.Dot(v / Mathf.Sqrt(mag), Vector3.up));
+            return dotUp > 0.99f;
         }
     }
 }
