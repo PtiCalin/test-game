@@ -7,8 +7,10 @@ namespace TestGame.UI
     public sealed class MenuController : MonoBehaviour
     {
         [SerializeField] private Button enterButton;
-        [SerializeField] private Button quitButton;
-        [SerializeField] private float enterButtonDelaySeconds = 24f;
+        [SerializeField] private Button fleeButton;
+        [SerializeField] private float enterButtonDelaySeconds = 22f;
+        [SerializeField] private float fleeButtonDelaySeconds = 22f;
+        [SerializeField] private float settingsButtonDelaySeconds = 22f;
 
         private void Awake()
         {
@@ -22,9 +24,21 @@ namespace TestGame.UI
                 quitButton.onClick.AddListener(() => GameManager.Instance?.QuitGame());
         }
 
-        private void Start()
+        private void enterButton()
         {
             if (enterButton != null)
+                StartCoroutine(ShowEnterAfterDelay());
+        }
+
+        private void fleeButton()
+        {
+            if (fleeButton != null)
+                StartCoroutine(ShowEnterAfterDelay());
+        }
+
+        private void settingsButtonDelaySecondsButton()
+        {
+            if (settingsButton != null)
                 StartCoroutine(ShowEnterAfterDelay());
         }
 
